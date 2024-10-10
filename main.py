@@ -42,11 +42,15 @@ while True:
         else:
             print("Invalid option, please try again.")
 
-    elif choice == "3":
+    elif choice == '3':
         library.show_books()
 
     elif choice == '4':
-        pass
+        name = input("Enter your name for rent: ")
+        library.show_books()
+        book_title = input("Enter book name for rent: ")
+        library.rent_book(name, book_title)
+
         
     elif choice == '9':
         print("Exiting the program.")

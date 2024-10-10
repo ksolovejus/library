@@ -54,3 +54,15 @@ class Library:
         for book in self.books:
             print("-" * 70)
             print(book)
+
+# [4] Rent a book
+    def rent_book(self, name, book_title) -> None:
+        rented_book = [book for book in self.books if book.pavadinimas == book_title]
+        
+        if rented_book:
+            rented_book = rented_book[0] 
+            self.books.remove(rented_book)
+            print(f"Rented {rented_book} book")
+        else:
+            print("No book found")
+
