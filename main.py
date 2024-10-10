@@ -1,31 +1,40 @@
+# main.py
+
 from insides.library import Library
 
-library = Library()
 
+library = Library()
+    
 while True:
-    print("\nOptions:"
-          "\n[1] Add a new book"
-          "\n[2] Remove old books"
-          "\n[3] Show all books"
-          "\n[9] Exit")
+    print("\nOptions:")
+    print("[1] Add a new book")
+    print("[2] Remove old books")
+    print("[3] Show all books")
+    print("[4] Exit")
+
     choice = input("Choose an option: ")
 
-    if choice == "1":
-        title = input("Enter book title: ")
-        author = input("Enter author: ")
-        year = int(input("Enter year of publication: "))
-        genre = input("Enter genre: ")
-        library.add_book(title, author, year, genre)
-    
-    elif choice == "2":
-        break
+    if choice == '1':
+        title = input("Enter book title (type 'def' to add preset books): ")
+        if title.lower() == "def":
+            # Added preset of books
+            library.add_book(title)
+        else:
+            author = input("Enter author: ")
+            year = int(input("Enter year of publication: "))
+            genre = input("Enter genre: ")
+            library.add_book(title, author, year, genre)
+        
+    elif choice == '2':
+        year_limit = int(input("Enter year limit for removal: "))
+        library.remove_old_books(year_limit)
 
-    elif choice == "3":
+    elif choice == '3':
         library.show_books()
-
-    elif choice == "9":
+        
+    elif choice == '4':
         print("Exiting the program.")
         break
 
     else:
-        print("ERROR")
+        print("Invalid option, please try again.")

@@ -1,10 +1,10 @@
+# library.py
+
 from insides.book import Book
 
 class Library:
     def __init__(self):
         self.books = []
-
-        # Preset of books 
         self.preset_books = [
             ("The Great Gatsby", "F. Scott Fitzgerald", 1925, "Classic"),
             ("1984", "George Orwell", 1949, "Dystopian"),
@@ -18,14 +18,29 @@ class Library:
             ("Crime and Punishment", "Fyodor Dostoevsky", 1866, "Philosophical Fiction"),
         ]
 
-    def add_book(self, title:str, author: str, year: int, genre: str) -> None:
-        new_book = Book(title, author, year, genre)
-        self.books.append(new_book)
-        print(f"Added: {new_book}")
+    def add_book(self, title: str, author: str = None, year: int = None, genre: str = None) -> None: # added "= None" so program don't request author, year, genre in case of preset use
+        if title.lower() == "def":
+            for preset in self.preset_books:
+                new_book = Book(*preset)  # Unpack the preset tuple
+                self.books.append(new_book)
+                print(f"Added: {new_book}")
+        else:
+            if author and year and genre:
+                new_book = Book(title, author, year, genre)
+                self.books.append(new_book)
+                print(f"Added: {new_book}")
+            else:
+                print("Please provide author, year, and genre for the new book.")
+
+    def remove_old_books(self, year_limit: int) -> None:
+        before_count = len(self.books)
+        self.books = [book for book in self.books if book.year >= year_limit]
+        after_count = len(self.books)
+        print(f"Removed {before_count - after_count} old books.")
 
     def show_books(self):
         if not self.books:
-            print("No books in the library")
+            print("No books in the library.")
+            return
         for book in self.books:
-            print("*" * 70)
             print(book)
