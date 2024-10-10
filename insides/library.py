@@ -4,6 +4,8 @@ from insides.book import Book
 class Library:
     def __init__(self):
         self.books = []
+        self.rented_books = {}
+
         self.preset_books = [
             ("The Great Gatsby", "F. Scott Fitzgerald", 1925, "Classic"),
             ("1984", "George Orwell", 1949, "Dystopian"),
@@ -56,13 +58,30 @@ class Library:
             print(book)
 
 # [4] Rent a book
-    def rent_book(self, name, book_title) -> None:
+    def rent_book(self, name: str, book_title: str) -> None:
         rented_book = [book for book in self.books if book.pavadinimas == book_title]
-        
+
         if rented_book:
-            rented_book = rented_book[0] 
+            rented_book = rented_book[0]
             self.books.remove(rented_book)
-            print(f"Rented {rented_book} book")
+
+            if name in self.rented_books:
+                self.rented_books[name].append(rented_book)
+            else:
+                self.rented_books[name] = [rented_book]
+            
+            print(f"{name} rented '{rented_book.pavadinimas}' book")
         else:
             print("No book found")
 
+# [5] Show all rented books
+    def show_rented_books(self) -> None:
+        if not self.rented_books:
+            print("No rented books")
+            return # To exit
+
+        print("Rented books:")
+        for name, rented_books in self.rented_books.items():
+            rented_book_titles = ', '.join([book.pavadinimas for book in rented_books])
+            print("-" * 50)
+            print(f"{name} has rented: {rented_book_titles}")

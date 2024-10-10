@@ -9,6 +9,9 @@ while True:
     print("[1] Add a new book")
     print("[2] Remove a book")
     print("[3] Show all books")
+    print("[4] Rent a book")
+    print("[5] Show all rented books")
+
     print("[9] Exit")
 
     choice = input("Choose an option: ")
@@ -50,6 +53,9 @@ while True:
         library.show_books()
         book_title = input("Enter book name for rent: ")
         library.rent_book(name, book_title)
+
+    elif choice == '5':
+        library.show_rented_books()
 
         
     elif choice == '9':
