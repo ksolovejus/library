@@ -1,4 +1,4 @@
-# Kuriamas sarasas
+# Kuriamas sarasas asf
 class Library:
     def __init__(self, pavadinimas: str, autorius: str, isleidimo_metai: float, zanras: str) -> None:
         self.pavadinimas = pavadinimas
