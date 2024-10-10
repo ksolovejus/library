@@ -1,5 +1,3 @@
-# main.py
-
 from insides.library import Library
 
 
@@ -10,7 +8,7 @@ while True:
     print("[1] Add a new book")
     print("[2] Remove old books")
     print("[3] Show all books")
-    print("[4] Exit")
+    print("[9] Exit")
 
     choice = input("Choose an option: ")
 
@@ -26,13 +24,14 @@ while True:
             library.add_book(title, author, year, genre)
         
     elif choice == '2':
+        library.show_books()
         year_limit = int(input("Enter year limit for removal: "))
         library.remove_old_books(year_limit)
 
     elif choice == '3':
         library.show_books()
         
-    elif choice == '4':
+    elif choice == '9':
         print("Exiting the program.")
         break
 

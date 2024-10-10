@@ -34,7 +34,8 @@ class Library:
 
     def remove_old_books(self, year_limit: int) -> None:
         before_count = len(self.books)
-        self.books = [book for book in self.books if book.year >= year_limit]
+        # Correctly access the year attribute
+        self.books = [book for book in self.books if book.isleidimo_metai >= year_limit]
         after_count = len(self.books)
         print(f"Removed {before_count - after_count} old books.")
 
