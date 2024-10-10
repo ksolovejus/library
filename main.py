@@ -25,9 +25,11 @@ while True:
             library.add_book(title, author, year, genre)
         
     elif choice == '2':
-        print("[1] Delete by name: "
-              "[2] Delete books older than year: ")
+        print("(1) Delete by name: "
+              "(2) Delete books older than year: ")
+        
         choice = input("Choose an option: ")
+
         if choice == "1":
             library.show_books()
             book_title = input("Enter book title: ")
@@ -40,8 +42,11 @@ while True:
         else:
             print("Invalid option, please try again.")
 
-    elif choice == '3':
+    elif choice == "3":
         library.show_books()
+
+    elif choice == '4':
+        pass
         
     elif choice == '9':
         print("Exiting the program.")
