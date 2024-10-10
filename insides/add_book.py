@@ -50,7 +50,7 @@ class AddBook:
 
 my_books = MyBooks()
 
-book_adder = AddBook(my_books)
-book_adder.add_book()
+add_book = AddBook(my_books)
+add_book.add_book()
 
-book_adder.display_books()
+add_book.display_books()
