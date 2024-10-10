@@ -1,5 +1,4 @@
-# library.py
-
+# Kometaras
 from insides.book import Book
 
 class Library:
