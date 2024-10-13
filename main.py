@@ -74,8 +74,8 @@ while True:
 
         elif choice == "2":
             library.show_books()
-            book_title = input("Enter book author: ")
-            library.search_by_title(book_title)
+            book_author = input("Enter book author: ")
+            library.search_by_author(book_author)
 
         else:
             print("Invalid option, please try again.")

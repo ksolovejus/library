@@ -16,6 +16,7 @@ class Library:
             ("The Hobbit", "J.R.R. Tolkien", 1937, "Fantasy"),
             ("War and Peace", "Leo Tolstoy", 1869, "Historical Fiction"),
             ("The Odyssey", "Homer", -800, "Epic Poetry"),
+            ("The Odyssey 2", "Homer", 800, "Epic Poetry"),
             ("Crime and Punishment", "Fyodor Dostoevsky", 1866, "Philosophical Fiction"),
         ]
         
@@ -87,6 +88,7 @@ class Library:
             print(f"{name} has rented: {rented_book_titles}")
 
 # [5] Search
+    # (1) Search by name: 
     def search_by_title(self, name) -> None:
         for book_name in self.books:
             if name == book_name.pavadinimas:
@@ -94,4 +96,18 @@ class Library:
                 return
             
         print("Sorry we don't have this book")
+        
+    # "(2) Search by author: "
+    def search_by_author(self, author) -> None:
+        found = []
+
+        for book_author in self.books:
+            if author == book_author.autorius:
+                found.append(book_author.pavadinimas)
+
+        if len(found) == 0:
+            print("Sorry we don't have book of this author")
+            return
+        
+        print(f"{author} wrote these books: {found}")
 
