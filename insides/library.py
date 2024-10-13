@@ -91,6 +91,7 @@ class Library:
         for book_name in self.books:
             if name == book_name.pavadinimas:
                 print(f"Book '{name}' is in the library.")
-            else:
-                print("Sorry we don't have this book")
+                return
+            
+        print("Sorry we don't have this book")
 
