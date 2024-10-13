@@ -14,6 +14,7 @@ while True:
     print("[3] Show all books")
     print("[4] Rent a book")
     print("[5] Show all rented books")
+    print("[6] Search")
 
     print("[9] Exit")
 
@@ -59,6 +60,25 @@ while True:
 
     elif choice == '5':
         library.show_rented_books()
+
+    elif choice == '6':
+        print("(1) Search by name: "
+              "(2) Search by author: ")
+        
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            library.show_books()
+            book_title = input("Enter book title: ")
+            library.search_by_title(book_title)
+
+        elif choice == "2":
+            library.show_books()
+            book_title = input("Enter book author: ")
+            library.search_by_title(book_title)
+
+        else:
+            print("Invalid option, please try again.")
 
         
     elif choice == '9':

@@ -85,3 +85,12 @@ class Library:
             rented_book_titles = ', '.join([book.pavadinimas for book in rented_books])
             print("-" * 50)
             print(f"{name} has rented: {rented_book_titles}")
+
+# [5] Search
+    def search_by_title(self, name) -> None:
+        for book_name in self.books:
+            if name == book_name.pavadinimas:
+                print(f"Book '{name}' is in the library.")
+            else:
+                print("Sorry we don't have this book")
+
