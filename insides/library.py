@@ -62,6 +62,10 @@ class Library:
     def rent_book(self, name: str, book_title: str) -> None:
         rented_book = [book for book in self.books if book.pavadinimas == book_title]
 
+        if name in self.rented_books and len(self.rented_books[name]) >= 3: # Check if user has reached maximum amount of rentable books
+            print(f"Error: {name} has already rented the maximum of 3 books.")
+            return
+        
         expiration_date = (datetime.now() + timedelta(days=7)).strftime("%m-%d") # Kuriamas nuomos deadline
 
         if rented_book:
