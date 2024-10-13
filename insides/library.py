@@ -1,4 +1,4 @@
-# Kometaras
+from datetime import datetime, timedelta
 from insides.book import Book
 
 class Library:
@@ -62,16 +62,18 @@ class Library:
     def rent_book(self, name: str, book_title: str) -> None:
         rented_book = [book for book in self.books if book.pavadinimas == book_title]
 
+        expiration_date = (datetime.now() + timedelta(days=7)).strftime("%m-%d") # Kuriamas nuomos deadline
+
         if rented_book:
             rented_book = rented_book[0]
             self.books.remove(rented_book)
 
             if name in self.rented_books:
-                self.rented_books[name].append(rented_book)
+                self.rented_books[name][rented_book.pavadinimas] = expiration_date
             else:
-                self.rented_books[name] = [rented_book]
+                self.rented_books[name] = {rented_book.pavadinimas: expiration_date}
             
-            print(f"{name} rented '{rented_book.pavadinimas}' book")
+            print(f"{name} rented '{rented_book.pavadinimas}' book, return by {expiration_date}")
         else:
             print("No book found")
 
@@ -83,9 +85,10 @@ class Library:
 
         print("Rented books:")
         for name, rented_books in self.rented_books.items():
-            rented_book_titles = ', '.join([book.pavadinimas for book in rented_books])
             print("-" * 50)
-            print(f"{name} has rented: {rented_book_titles}")
+            print(f"{name} has rented the following books: ")
+            for book_title, expiration_date in rented_books.items():
+                print(f"'{book_title}' (Return by: {expiration_date})")
 
 # [5] Search
     # (1) Search by name: 
