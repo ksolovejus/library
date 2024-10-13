@@ -1,4 +1,7 @@
-# kokmetaras
+# TO do
+# list of book genres
+# add limit to the rentable books
+# add book search
 from insides.library import Library
 
 

@@ -35,12 +35,12 @@ class Library:
                 print("Please provide author, year, and genre for the new book.")
 
 # [2] Remove a book
-    # (1) Delete by name: "
+    # (1) Delete by name:
     def remove_title_books(self, book_title) -> None:
         self.books = [book for book in self.books if book.pavadinimas != book_title]
         print(f"Removed {book_title} book.")
 
-    # (2) Delete books older than year: "
+    # (2) Delete books older than year:
     def remove_old_books(self, year_limit: int) -> None:
         before_count = len(self.books)
         # Correctly access the year attribute
