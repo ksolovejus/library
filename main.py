@@ -1,5 +1,4 @@
 # TO do
-# add limit to the rentable books
 from insides.library import Library
 
 
@@ -13,6 +12,7 @@ while True:
     print("[4] Rent a book")
     print("[5] Show all rented books")
     print("[6] Search")
+    print("[7] Show all overdue books")
 
     print("[9] Exit")
 
@@ -77,6 +77,9 @@ while True:
 
         else:
             print("Invalid option, please try again.")
+
+    elif choice == '7':
+        library.show_overdue_books()
 
         
     elif choice == '9':
