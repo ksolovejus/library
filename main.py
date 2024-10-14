@@ -15,6 +15,7 @@ while True:
     print("[7] Show all overdue books")
     print("[8] Load")
     print("[9] Save")
+    print("[10] Exit")
 
     choice = input("Choose an option: ")
 
@@ -86,6 +87,9 @@ while True:
 
     elif choice == '9':
         library.save_data()
+    
+    elif choice == '10':
+        print("Exiting program")
         break
 
     else:
