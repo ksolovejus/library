@@ -13,8 +13,8 @@ while True:
     print("[5] Show all rented books")
     print("[6] Search")
     print("[7] Show all overdue books")
-
-    print("[9] Exit")
+    print("[8] Load")
+    print("[9] Save")
 
     choice = input("Choose an option: ")
 
@@ -81,9 +81,11 @@ while True:
     elif choice == '7':
         library.show_overdue_books()
 
-        
+    elif choice == '8':
+        library.load_data()
+
     elif choice == '9':
-        print("Exiting the program.")
+        library.save_data()
         break
 
     else:

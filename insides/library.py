@@ -1,4 +1,6 @@
 from datetime import datetime, timedelta
+import pickle
+
 from insides.book import Book
 
 class Library:
@@ -150,3 +152,27 @@ class Library:
         
         if not overdue_books_found:
             print("No overdue books at the moment.")
+
+    # [8] Load
+    def load_data(self, filename="library_data.pkl") -> None:
+        try:
+            with open(filename, "rb") as file:
+                data = pickle.load(file)
+                self.books = data['books']
+                self.rented_books = data['rented_books']
+            
+            print(f"Library data loaded from {filename}.")
+        except FileNotFoundError:
+            print(f"No saved data found in {filename}.")
+
+    # [9] Save
+    def save_data(self, filename="library_data.pkl") -> None:
+        data = {
+            'books': self.books,
+            'rented_books': self.rented_books
+        }
+        
+        with open(filename, "wb") as file:
+            pickle.dump(data, file)
+        
+        print(f"Library data saved to {filename}.")
