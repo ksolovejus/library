@@ -64,19 +64,21 @@ class Library:
         rented_book = [book for book in self.books if book.pavadinimas == book_title]
 
         today = datetime.now()
-        for book, expiration in self.rented_books.items():
-            expiration_date = datetime.strftime(expiration, "%m-%d")
 
-            if expiration_date < today:
-                print(f"{name} has overdue books and cannot rent more")
-                return
+        # Check if user has overdue books
+        if name in self.rented_books:
+            for _, expiration in self.rented_books[name].items():
+                expiration_date = datetime.strptime(expiration, "%m-%d")
+                if expiration_date < today:
+                    print(f"{name} has overdue books and cannot rent more.")
+                    return
 
-        if name in self.rented_books and len(self.rented_books[name]) >= 3: # Check if user has reached maximum amount of rentable books
+        # Check if user has reached the maximum amount of rentable books
+        if name in self.rented_books and len(self.rented_books[name]) >= 3:
             print(f"Error: {name} has already rented the maximum of 3 books.")
             return
-        
-        
-        expiration_date = (datetime.now() + timedelta(days=7)).strftime("%m-%d") # Kuriamas nuomos deadline
+
+        expiration_date = (today + timedelta(days=7)).strftime("%m-%d")  # Create rental deadline
 
         if rented_book:
             rented_book = rented_book[0]
@@ -86,10 +88,10 @@ class Library:
                 self.rented_books[name][rented_book.pavadinimas] = expiration_date
             else:
                 self.rented_books[name] = {rented_book.pavadinimas: expiration_date}
-            
+
             print(f"{name} rented '{rented_book.pavadinimas}' book, return by {expiration_date}")
         else:
-            print("No book found")
+            print("No book found.")
 
 # [5] Show all rented books
     def show_rented_books(self) -> None:
@@ -104,7 +106,7 @@ class Library:
             for book_title, expiration_date in rented_books.items():
                 print(f"'{book_title}' (Return by: {expiration_date})")
 
-# [5] Search
+# [6] Search
     # (1) Search by name: 
     def search_by_title(self, name) -> None:
         for book_name in self.books:
@@ -130,13 +132,21 @@ class Library:
 
 # [7] Show all overdue books
     def show_overdue_books(self) -> None:
-        if not self.rented_books:
-            print("No rented books")
-            return
+        current_date = datetime.now()
 
-        print("Rented books:")
-        for name, rented_books in self.rented_books.items():
-            print("-" * 50)
-            print(f"{name} has rented the following books: ")
-            for book_title, expiration_date in rented_books.items():
-                print(f"'{book_title}' (Return by: {expiration_date})")
+        overdue_books_found = False  # To check if we find any overdue books
+        for name, books in self.rented_books.items():
+            overdue_books = []
+            
+            for book_title, expiration_date in books.items():
+                expiration_datetime = datetime.strptime(expiration_date, "%m-%d").replace(year = current_date.year)
+                
+                if expiration_datetime < current_date:
+                    overdue_books.append(book_title)
+
+            if overdue_books:
+                overdue_books_found = True
+                print(f"{name} has overdue the following books: {', '.join(overdue_books)}")
+        
+        if not overdue_books_found:
+            print("No overdue books at the moment.")
