@@ -8,6 +8,7 @@ class Library:
     def __init__(self):
         self.books = []
         self.rented_books = {}
+        self.logins = Logins()
 
         self.preset_books = [
             ("The Great Gatsby", "F. Scott Fitzgerald", 1925, "Classic"),
@@ -71,7 +72,7 @@ class Library:
         # Check if user has overdue books
         if name in self.rented_books:
             for _, expiration in self.rented_books[name].items():
-                expiration_date = datetime.strptime(expiration, "%m-%d")
+                expiration_date = datetime.strptime(expiration, "%Y-%m-%d")
                 if expiration_date < today:
                     print(f"{name} has overdue books and cannot rent more.")
                     return
@@ -81,7 +82,7 @@ class Library:
             print(f"Error: {name} has already rented the maximum of 3 books.")
             return
 
-        expiration_date = (today + timedelta(days=7)).strftime("%m-%d")  # Create rental deadline
+        expiration_date = (today + timedelta(days=7)).strftime("%Y-%m-%d")  # Create rental deadline
 
         if rented_book:
             rented_book = rented_book[0]
@@ -154,23 +155,25 @@ class Library:
         if not overdue_books_found:
             print("No overdue books at the moment.")
 
-    # [8] Load
+# [8] Load
     def load_data(self, filename="library_data.pkl") -> None:
         try:
             with open(filename, "rb") as file:
                 data = pickle.load(file)
                 self.books = data['books']
                 self.rented_books = data['rented_books']
+                self.logins.customers = data['customers']
             
             print(f"Library data loaded from {filename}.")
         except FileNotFoundError:
             print(f"No saved data found in {filename}.")
 
-    # [9] Save
+# [9] Save
     def save_data(self, filename="library_data.pkl") -> None:
         data = {
             'books': self.books,
-            'rented_books': self.rented_books
+            'rented_books': self.rented_books,
+            'customers': self.logins.customers
         }
         
         with open(filename, "wb") as file:
