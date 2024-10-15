@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import pickle
 
 from insides.book import Book
+from insides.logins import Logins
 
 class Library:
     def __init__(self):
