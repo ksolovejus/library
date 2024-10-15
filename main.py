@@ -9,7 +9,7 @@ logins = Logins()
 while True:
     print("\nOptions:")
     print("[1] Log in")
-    print("[2] Register")
+    print("[2] Sign in")
     print("[3] Load")
     print("[4] Save")
     print("[5] Exit")
@@ -116,10 +116,9 @@ while True:
                     library.show_books()
 
                 elif choice == '4':
-                    name = input("Enter your name for rent: ")
                     library.show_books()
                     book_title = input("Enter book name for rent: ")
-                    library.rent_book(name, book_title)
+                    library.rent_book(username, book_title)
 
                 elif choice == '6':
                     print("(1) Search by name: "
@@ -150,7 +149,19 @@ while True:
         if login_status == "failed":
             print("Login failed. Please try again.")
             continue
-
+    elif choice == '2':
+        username = input("Please create your username: ")
+        password = input("Please create your password: ")
+        password_repeat = input("Please repeat your password: ")
+        logins.sign_in(username, password, password_repeat)
+    elif choice == '3':
+        library.load_data()
+    elif choice == '4':
+        library.save_data()
+    elif choice == '5':
+        print("Exiting program.")
+        break
+        
     # while True:
     #     print("\nOptions:")
     #     print("[1] Add a new book")
